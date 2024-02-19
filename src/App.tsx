@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import "./App.css";
 
 interface Person {
@@ -9,7 +9,8 @@ interface Person {
 function App() {
   const [user, setUser] = useState<Person>();
 
-  const submitHandler = () => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log(user);
   };
 
@@ -26,7 +27,7 @@ function App() {
         />
         <input
           type="text"
-          value={user?.name}
+          value={user?.name || ""}
           placeholder="Name"
           onChange={(e) =>
             setUser((prev) => ({ ...prev!, name: String(e.target.value) }))
